@@ -1,11 +1,28 @@
-Reto 1: Web Scraping
+#  Scrapping - Plaza Vea
 
-Descripción:
-- Visitar el sitio web de Plaza Vea (https://www.plazavea.com.pe/) y realizar la extracción de todos los productos disponibles de todas las categorías. 
-- Al completar esta tarea, subir el archivo al repositorio.
+Pasos para ejecutar el scrapping de la página web de Plaza Vea:
 
-Objetivo:
-- Aplicar los conocimientos adquiridos durante las clases y reforzar lo aprendido mediante una actividad práctica.
 
-Fecha de entrega:
-- Lunes, 6:00 p.m.
+
+1. Instalar las dependencias
+```bash
+npm install
+```
+
+2. Ejecutar el script
+```bash
+npm start
+```
+
+## Carpetas
+
+En la carpeta `output` se encuentran los archivos `.json` por cada categoría. 
+
+Dentro de la carpeta `output / subcategories` se encuentran los archivos `.json` por cada subcategoría.
+
+## Información
+
+1. El script está limitado a las categorías que `no pertenecen` a `Supermercado`.
+
+2. El scraping está limitado a 2 páginas por subcategoría para mostrar el funcionamiento del script. Se puede modificar esto para que scrapee todas las páginas `eliminando` el `if` de la `línea 111`.
+
