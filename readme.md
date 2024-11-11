@@ -2,8 +2,6 @@
 
 Pasos para ejecutar el scrapping de la página web de Plaza Vea:
 
-
-
 1. Instalar las dependencias
 ```bash
 npm install
