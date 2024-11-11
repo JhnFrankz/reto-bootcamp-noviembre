@@ -4,6 +4,13 @@ import puppeteer from "puppeteer";
 (async () => {
   const URL = "https://www.plazavea.com.pe/";
 
+  if (!fs.existsSync("output")) {
+    fs.mkdirSync("output", { recursive: true });
+  }
+  if (!fs.existsSync("output/subcategories")) {
+    fs.mkdirSync("output/subcategories", { recursive: true });
+  }
+
   const browser = await puppeteer.launch({
     headless: false,
     defaultViewport: null,
@@ -20,7 +27,7 @@ import puppeteer from "puppeteer";
 
   const allProducts = [];
 
-  for (let i = 17; i < categories.length; i++) {
+  for (let i = 0; i < categories.length; i++) {
     // Recorremos las categorías
     console.log("_________CATEGORY_________");
     await page.waitForSelector(".MainMenu__wrapper__departments .MainMenu__wrapper__departments__item__link");
@@ -39,12 +46,12 @@ import puppeteer from "puppeteer";
     await page.waitForSelector(".MainMenu__wrapper__subcategories__item .MainMenu__wrapper__subcategories__item__link");
 
     const subCategories = Array.from(await page.$$(".MainMenu__wrapper__subcategories__item:not(.marcas) .MainMenu__wrapper__subcategories__item__link"));
-    console.log(subCategories);
 
     for (let j = 0; j < subCategories.length; j++) {
       // Recorremos las subcategorías
       const subCategory = (await page.$$(".MainMenu__wrapper__subcategories__item:not(.marcas) .MainMenu__wrapper__subcategories__item__link"))[j];
       const nameSubCategory = await page.evaluate(el => el.textContent, subCategory);
+      console.log(nameSubCategory);
 
       await subCategory.click();
       await page.waitForSelector(".showcase-grid", { visible: true });
@@ -91,7 +98,6 @@ import puppeteer from "puppeteer";
           });
           console.log(`Total de páginas calculado: ${totalPages}`);
         }
-
         console.log(`Página actual: ${currentPage} de ${totalPages}`);
 
         if (currentPage >= totalPages || newProducts.length === 0) {
