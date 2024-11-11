@@ -25,10 +25,11 @@ import puppeteer from "puppeteer";
   // Devuelve ElementHandle de puppeteer (para hacer click, hover, etc)
   const categories = Array.from(await page.$$(".MainMenu__wrapper__departments .MainMenu__wrapper__departments__item[data-index]:not(.onlyDesktop) .MainMenu__wrapper__departments__item__link"));
 
-  const allProducts = [];
 
   for (let i = 0; i < categories.length; i++) {
     // Recorremos las categorías
+    const allProducts = [];
+
     console.log("_________CATEGORY_________");
     await page.waitForSelector(".MainMenu__wrapper__departments .MainMenu__wrapper__departments__item__link");
     const category = (await page.$$(".MainMenu__wrapper__departments .MainMenu__wrapper__departments__item[data-index]:not(.onlyDesktop) .MainMenu__wrapper__departments__item__link"))[i];
@@ -104,6 +105,7 @@ import puppeteer from "puppeteer";
           nextPage = false;
         } else {
           currentPage++;
+
           nextPage = await page.evaluate((currentPage) => {
             const currentUrl = new URL(window.location.href);
             currentUrl.searchParams.set("page", currentPage);
